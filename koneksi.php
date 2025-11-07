@@ -1,14 +1,8 @@
 <?php
-$host = "localhost";
-$user = "root";
-$pass = "";
-$db   = "kampus";
+$koneksi = mysqli_connect("localhost","root","","kampus");
 
-$conn = mysqli_connect($host, $user, $pass, $db);
-
-if ($conn) {
-    echo "✅ Koneksi Berhasil";
-} else {
-    echo "❌ Koneksi Gagal: " . mysqli_connect_error();
+// cek koneksi
+if(!$koneksi){
+    die("Koneksi database gagal: " . mysqli_connect_error());
 }
 ?>

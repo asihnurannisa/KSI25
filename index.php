@@ -1,68 +1,91 @@
+<?php include 'koneksi.php'; ?>
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menu Utama</title>
+<meta charset="UTF-8">
+<title>Data Mahasiswa</title>
 
-    <!-- Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+<style>
+body{
+    font-family: 'Segoe UI', sans-serif;
+    background: #ffe6ee;
+    margin:0; padding:0;
+}
+.container{
+    width: 800px;
+    background:white;
+    margin:40px auto;
+    padding:25px;
+    border-radius:15px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+h2{
+    color:#ff4089;
+    text-align:center;
+}
+a.btn{
+    display:inline-block;
+    padding:10px 14px;
+    background:#ff4d88;
+    color:white;
+    border-radius:8px;
+    text-decoration:none;
+    margin-bottom:15px;
+    transition:.3s;
+}
+a.btn:hover{
+    background:#e63971;
+}
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:10px;
+}
+th, td{
+    padding:12px;
+    border:1px solid #ffc7da;
+    text-align:center;
+}
+th{
+    background:#ffbad2;
+}
+td{
+    background:#fff4f7;
+}
+</style>
 
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Poppins', sans-serif;
-            background: #ffe6ef;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-
-        .container {
-            background: white;
-            padding: 30px 50px;
-            border-radius: 20px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
-            text-align: center;
-            width: 350px;
-        }
-
-        h2 {
-            color: #ff5c8a;
-            font-weight: 600;
-            margin-bottom: 30px;
-        }
-
-        .btn {
-            display: block;
-            width: 100%;
-            padding: 12px;
-            margin: 12px 0;
-            border: none;
-            border-radius: 10px;
-            background: #ff8db3;
-            color: white;
-            font-size: 15px;
-            cursor: pointer;
-            transition: 0.3s;
-            text-decoration: none;
-        }
-
-        .btn:hover {
-            background: #ff5c8a;
-        }
-    </style>
 </head>
 <body>
 
 <div class="container">
-    <h2>Sistem Input Data</h2>
+<h2>📚 DATA MAHASISWA</h2>
 
-    <a href="index.php" class="btn">Lihat Data</a>
-    <a href="Tambah.php" class="btn">Tambah Data</a>
-    <a href="Koneksi.php" class="btn">Cek Koneksi Database</a>
+<a href="tambah.php" class="btn">+ Tambah Data</a>
+
+<table>
+<tr>
+    <th>No</th>
+    <th>Nama</th>
+    <th>NIM</th>
+    <th>Prodi</th>
+</tr>
+
+<?php
+$no = 1;
+$data = mysqli_query($koneksi, "SELECT * FROM mahasiswa ORDER BY id DESC");
+while($d = mysqli_fetch_array($data)){
+    echo "<tr>
+            <td>$no</td>
+            <td>".$d['nama']."</td>
+            <td>".$d['nim']."</td>
+            <td>".$d['prodi']."</td>
+        </tr>";
+    $no++;
+}
+?>
+</table>
+
 </div>
 
 </body>
